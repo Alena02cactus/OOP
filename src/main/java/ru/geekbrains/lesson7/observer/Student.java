@@ -2,24 +2,29 @@ package ru.geekbrains.lesson7.observer;
 
 public class Student implements Observer {
 
-    private String name;
+    private final String name;
+
+    private final String jobTitle;
 
     private int salary = 2000;
 
-    public Student(String name) {
+    public Student(String name,String jobTitle) {
         this.name = name;
+        this.jobTitle = jobTitle;
     }
 
     @Override
-    public void receiveOffer(String companyName, int salary) {
-        if (this.salary <= salary){
-            System.out.printf("Студент: %s: Мне нужна эта работа! (Компания: %s; Заработная плата: %d)\n",
-                    name, companyName, salary);
-            this.salary = salary;
+    public boolean receiveOffer(String companyName, String jobTitle, int salary) {
+        if (this.salary <= salary && this.jobTitle.equals(jobTitle)){
+            System.out.printf("Студент: %s: Мне нужна эта работа! (Компания: %s; Вакансия: %s; Заработная плата: %d)\n",
+                    name, companyName, jobTitle, salary);
+            return true;
+
         }
         else{
-            System.out.printf("Студент: %s: Я найду работу получше! (Компания: %s; Заработная плата: %d)\n",
-                    name, companyName, salary);
+            System.out.printf("Студент: %s: Я найду работу получше! (Компания: %s; Вакансия: %s; Заработная плата: %d)\n",
+                    name, companyName, jobTitle, salary);
+            return false;
         }
     }
 }

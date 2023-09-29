@@ -12,17 +12,23 @@ public class Program {
      */
     public static void main(String[] args) {
         Publisher jobAgency = new JobAgency();
-        Company google = new Company("Google",  jobAgency,120000);
-        Company yandex = new Company("Yandex",  jobAgency,90000);
-        Company geekBrains = new Company("GeekBrains",  jobAgency,95000);
 
-        Student student1 = new Student("Student1");
-        Worker worker1 = new Worker("Worker1");
-        Worker worker2 = new Worker("Worker2");
+        Vacancy vacancy1 = new Vacancy("Разработчик",70000);
+        Vacancy vacancy2 = new Vacancy("Менеджер",50000);
+        Vacancy vacancy3 = new Vacancy("Дизайнер",60000);
+
+        Company google = new Company("Google",  jobAgency, vacancy1);
+        Company yandex = new Company("Yandex",  jobAgency, vacancy2);
+        Company geekBrains = new Company("GeekBrains",  jobAgency, vacancy3);
+
+        Student student1 = new Student("Артем","Разработчик");
+        Worker worker1 = new Worker("Сергей","Менеджер");
+        Freelancer freelancer1 = new Freelancer("Николай","Дизайнер");
 
         jobAgency.registerObserver(student1);
         jobAgency.registerObserver(worker1);
-        jobAgency.registerObserver(worker2);
+        jobAgency.registerObserver(freelancer1);
+        
 
         for (int i = 0; i < 3; i++){
             google.needEmployee();

@@ -4,22 +4,25 @@ public class Worker implements Observer {
 
     private String name;
 
-    private int salary = 80000;
+    private String jobTitle;
+    private int salary = 70000;
 
-    public Worker(String name) {
+    public Worker(String name, String jobTitle) {
         this.name = name;
+        this.jobTitle = jobTitle;
     }
 
     @Override
-    public void receiveOffer(String companyName, int salary) {
-        if (this.salary <= salary){
-            System.out.printf("Студент: %s: Мне нужна эта работа! (Компания: %s; Заработная плата: %d)\n",
-                    name, companyName, salary);
-            this.salary = salary;
-        }
-        else{
-            System.out.printf("Студент: %s: Я найду работу получше! (Компания: %s; Заработная плата: %d)\n",
-                    name, companyName, salary);
+    public boolean receiveOffer(String companyName, String jobTitle, int salary) {
+        if (this.salary <= salary && this.jobTitle.equals(jobTitle)) {
+            System.out.printf("Рабочий: %s: Мне нужна эта работа! (Компания: %s; Вакансия: %s; Заработная плата: %d)\n",
+                    name, companyName, jobTitle, salary);
+            return true;
+        } else {
+            System.out.printf(
+                    "Рабочий: %s: Я найду работу получше! (Компания: %s; Вакансия: %s; Заработная плата: %d)\n",
+                    name, companyName, jobTitle, salary);
+            return false;
         }
     }
 }

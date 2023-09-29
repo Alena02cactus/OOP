@@ -9,10 +9,14 @@ public class JobAgency implements Publisher{
 
 
     @Override
-    public void sendOffer(String companyName, int salary) {
+    public Observer sendOffer(String companyName, String jobTitle, int salary) {
         for (Observer observer: observers) {
-            observer.receiveOffer(companyName, salary);
+            if(observer.receiveOffer(companyName, jobTitle, salary)){
+                System.out.println("Работник согласен на должность!");
+                return observer;
+            }
         }
+        return null;
     }
 
     @Override
@@ -24,4 +28,5 @@ public class JobAgency implements Publisher{
     public void removeObserver(Observer observer) {
         observers.remove(observer);
     }
+
 }

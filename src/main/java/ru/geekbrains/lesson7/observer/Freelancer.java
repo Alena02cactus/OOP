@@ -6,9 +6,11 @@ public class Freelancer {
     private String jobTitle;
     private int salary = 60000;
 
-    public Freelancer(String name,String jobTitle) {
+    public Freelancer(String name,String jobTitle) 
+    {
         this.name = name;
         this.jobTitle = jobTitle;
+        
     }
 
     @Override

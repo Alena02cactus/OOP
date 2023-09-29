@@ -2,7 +2,7 @@ package ru.geekbrains.lesson7.observer;
 
 public interface Publisher {
 
-    void sendOffer(String companyName, int salary);
+    Observer sendOffer(String companyName, String job, int salary);
 
     void registerObserver(Observer observer);
 

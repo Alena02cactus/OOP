@@ -1,24 +1,29 @@
 package ru.geekbrains.lesson7.observer;
 
-import java.util.Random;
+//import java.util.Random;
 
 public class Company {
 
-    private Random random = new Random();
 
     private String name;
     private Publisher jobAgency;
-    private int maxSalary;
+    private Vacancy vacancy;
 
-    public Company(String name, Publisher jobAgency, int maxSalary) {
+    public Company(String name, Publisher jobAgency, Vacancy vacancy) {
         this.name = name;
         this.jobAgency = jobAgency;
-        this.maxSalary = maxSalary;
+        this.vacancy = vacancy;
     }
 
     public void needEmployee(){
-        int salary = random.nextInt(maxSalary);
-        jobAgency.sendOffer(name, salary);
+        Observer observer = jobAgency.sendOffer(name, vacancy.getName(), vacancy.getSalary());
+        if(observer != null){
+            jobAgency.removeObserver(observer);
+            System.out.printf("Сотрудник на должность %s найден!\n", vacancy.getName());
+        } else {
+            vacancy.setSalary(vacancy.getSalary() + 10000);
+        }
     }
 
+    
 }
